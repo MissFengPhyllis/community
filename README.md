@@ -6,6 +6,7 @@
 [es](https://elasticsearch.cn/explore/)
 [Github deploy key]()
 [FlyWay 的maven配置](https://flywaydb.org/getstarted/firststeps/maven)
+[bootstrap](https://v3.bootcss.com/css/)
 
 ### 工具
 https://git-scm.com/
@@ -27,4 +28,7 @@ CREATE USER IF NOT EXISTS sa PASSWORD '123';
 ALTER USER sa admin true ;
 
 
+```
+```css
+mvn flyway:migrate
 ```
