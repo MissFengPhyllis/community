@@ -5,6 +5,7 @@
 [Spring Web](https://spring.io/guides/gs/serving-web-content/)
 [es](https://elasticsearch.cn/explore/)
 [Github deploy key]()
+[FlyWay 的maven配置](https://flywaydb.org/getstarted/firststeps/maven)
 
 ### 工具
 https://git-scm.com/
@@ -22,6 +23,8 @@ create table USER
     constraint USER_PK
         primary key (ID)
 );
+CREATE USER IF NOT EXISTS sa PASSWORD '123';
+ALTER USER sa admin true ;
 
 
 ```
