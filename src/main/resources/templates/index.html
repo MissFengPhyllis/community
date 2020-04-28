@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="css\bootstrap.min.css">
     <link rel="stylesheet" href="css\bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css\community.css">
     <script src="js\bootstrap.min.js"></script>
 </head>
 <body>
@@ -42,5 +43,34 @@
         </div>
     </div>
 </nav>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 clo-md-12 col-sm-12 col-xs-12" >
+            <h3><span class="glyphicon glyphicon-plus-list" aria-hidden="true"></span><span>  </span>Issue List</h3>
+            <hr>
+            <div class="media" th:each="question:${questions}">
+                <div class="media-left ">
+                    <a href="#">
+                        <img class="media-object img-rounded" style="width:40px; height: 40px;" th:src="${question.user.avatarUrl}" >
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading" th:text="${question.title}">Spring boot Study</h4>
+                    <span th:text="${question.description}"></span><br>
+                    <span class="comment-text"> <span th:text="${question.commentCount}"></span> 个回复  • <span th:text="${question.viewCount}"></span> 次浏览  <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span></span>
+                </div>
+                <hr>
+            </div>
+
+        </div>
+        <div class="col-lg-3 clo-md-12 col-sm-12 col-xs-12" >
+            <h3>HOT TOPIC</h3>
+            • 问题标题: 请用精简的语言描述您发布的问题，不超过25字
+            • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料
+            • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -54,6 +54,8 @@ public class AuthorizeController {
             user.setName(githubUser.getName());
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            user.setAvatarUrl(githubUser.getAvatarUrl());//把用户的头像地址保存进去
+
             //插入数据库的过程就相当于写入session了，用数据库实物的存储代替了session的写入
             userMapper.insert(user);
             //cookie是在response里面，所以要在前面函数的部分去注入一个response

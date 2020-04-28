@@ -7,6 +7,7 @@
 [Github deploy key]()
 [FlyWay 的maven配置](https://flywaydb.org/getstarted/firststeps/maven)
 [bootstrap](https://v3.bootcss.com/css/)
+[lombok](https://projectlombok.org/ )
 
 ### 工具
 https://git-scm.com/
