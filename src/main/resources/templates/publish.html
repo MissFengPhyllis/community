@@ -26,6 +26,9 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
+                <li th:if="${session.user != null}">
+                    <a href="/publish">publish</a>
+                </li>
                 <li class="dropdown" th:if="${session.user != null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getName()}"> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -45,19 +48,21 @@
         <div class="col-lg-9 clo-md-12 col-sm-12 col-xs-12" >
             <h3><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span><span>  </span>Publish Quiz</h3>
             <hr>
-            <form action="">
+            <form action="/publish" method="post">
                 <div class="form-group">
                     <label for="title">Problem Title</label>
-                    <input type="text" class="form-control" id="title" placeholder="Problem Title...">
+                    <input type="text" class="form-control" id="title" th:value="${title}" name="title" placeholder="Problem Title...">
                 </div>
                 <div class="form-group">
                     <label for="description">Problem Description</label>
-                    <textarea type="textarea" class="form-control" id="description" cols="30" rows="10" placeholder="Problem Title..."></textarea>
+                    <textarea class="form-control" id="description" th:value="${description}" name="description" cols="30" rows="10" placeholder="Problem Title..."></textarea>
                     </div>
                 <div class="form-group">
                     <label for="tag">Problem Tag</label>
-                    <input type="text" class="form-control" id="tag" placeholder="Add tag ,seperated by ， ">
+                <!--  这里的th:value是为了暂时将输入到input框中的值保存起来   -->
+                    <input type="text" class="form-control"  id="tag" name="tag" placeholder="Add tag ,seperated by ， " th:value="${tag}">
                 </div>
+                <span class="alert alert-danger" th:text="${error}" th:if="${error != null}"></span>
                 <button class="btn btn-success btn-publish">Publish</button>
             </form>
 
