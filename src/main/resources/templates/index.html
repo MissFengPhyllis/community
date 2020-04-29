@@ -48,7 +48,7 @@
         <div class="col-lg-9 clo-md-12 col-sm-12 col-xs-12" >
             <h3><span class="glyphicon glyphicon-plus-list" aria-hidden="true"></span><span>  </span>Issue List</h3>
             <hr>
-            <div class="media" th:each="question:${questions}">
+            <div class="media" th:each="question: ${pagination.questions}">
                 <div class="media-left ">
                     <a href="#">
                         <img class="media-object img-rounded" style="width:40px; height: 40px;" th:src="${question.user.avatarUrl}" >
@@ -61,12 +61,30 @@
                 </div>
                 <hr>
             </div>
-
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <div class="col-lg-3 clo-md-12 col-sm-12 col-xs-12" >
             <h3>HOT TOPIC</h3>
             • 问题标题: 请用精简的语言描述您发布的问题，不超过25字
-            • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料
+                c
             • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字
         </div>
     </div>

@@ -1,6 +1,6 @@
 package elte.phyllis.community.community.services;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
+import elte.phyllis.community.community.dto.PaginationDTO;
 import elte.phyllis.community.community.dto.QuestionDTO;
 import elte.phyllis.community.community.mapper.QuestionMapper;
 import elte.phyllis.community.community.mapper.UserMapper;
@@ -22,9 +22,11 @@ public class QuestionServices {
     @Autowired
     private QuestionMapper questionMapper;
 
-    public List<QuestionDTO> list() {
-        List<Question> questions= questionMapper.list();
+    public PaginationDTO list(Integer page, Integer size) {
+        Integer offset  =size * (page-1);
+        List<Question> questions= questionMapper.list(offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
+        PaginationDTO paginationDTO = new PaginationDTO();
         for (Question question : questions) {
             User user = userMapper.findById(question.getId());
             //把question里面的对象都放入到DTO里面去
@@ -36,7 +38,11 @@ public class QuestionServices {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        return questionDTOList;
+        paginationDTO.setQuestions(questionDTOList);
+        Integer totalCount = questionMapper.count();
+        paginationDTO.setPagination(totalCount,page,size);
+
+        return paginationDTO;
     }
     ///目的在于这里面不仅可以使用questionmapper，还能用usermapper，起到一个组装的作用
 }

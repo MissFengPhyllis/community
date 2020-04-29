@@ -1,5 +1,6 @@
 package elte.phyllis.community.community.controller;
 
+import elte.phyllis.community.community.dto.PaginationDTO;
 import elte.phyllis.community.community.dto.QuestionDTO;
 import elte.phyllis.community.community.mapper.QuestionMapper;
 import elte.phyllis.community.community.mapper.UserMapper;
@@ -34,7 +35,11 @@ public class IndexController {
 //        model.addAttribute("name", name);
 //        return "index";
 //    }
-    public String index(HttpServletRequest request,Model model){
+    public String index(HttpServletRequest request,
+                        Model model,
+                        @RequestParam(name = "page",defaultValue = "1") Integer page,
+                        @RequestParam(name = "size",defaultValue = "5") Integer size
+                        ){
         //我们只知道request.getcookies，但是不知道这个结果是啥，那就直接control+alt+V,自己就实例化了
         Cookie[] cookies = request.getCookies();//由于这里获取到的cookie是一个数组，那么先循环看一下这里里面都是啥
         //这里直接用cookiles.for这是一个快捷键，输入以后回车键，就出现了下面的增强For循环的格式，节省很多时间
@@ -54,8 +59,8 @@ public class IndexController {
             }
         }
         //获取question里面的所有的信息
-        List<QuestionDTO> questionList = questionServices.list();
-        model.addAttribute("questions",questionList);
+        PaginationDTO pagination = questionServices.list(page,size);
+        model.addAttribute("pagination",pagination);
         //这里的token怎么来那，当然还是通过httpserletrequest来获取
         //我们需要去定义一个通过找到token来确定用户的一个函数，当然controller里面只管自己的业务逻辑，不管实际的这个差找的
 
