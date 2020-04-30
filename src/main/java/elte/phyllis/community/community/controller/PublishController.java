@@ -1,13 +1,16 @@
 package elte.phyllis.community.community.controller;
 
+import elte.phyllis.community.community.dto.QuestionDTO;
 import elte.phyllis.community.community.mapper.QuestionMapper;
 import elte.phyllis.community.community.mapper.UserMapper;
 import elte.phyllis.community.community.model.Question;
 import elte.phyllis.community.community.model.User;
+import elte.phyllis.community.community.services.QuestionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,8 +19,20 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class PublishController {
     @Autowired
-    private QuestionMapper questionMapper;
+    private QuestionServices questionServices;
 
+    @GetMapping("/publish/{id}")
+    public String edit(@PathVariable(name="id") Integer id,
+                       Model model){
+        QuestionDTO question = questionServices.getById(id);
+        //将获取到的元素填充到页面上
+        model.addAttribute("title",question.getTitle());
+        model.addAttribute("description",question.getDescription());
+        model.addAttribute("tag",question.getTag());
+        model.addAttribute("id",question.getId());
+        return "publish";
+
+    }
     @GetMapping("/publish")
     public String publish(){
         return"publish";
@@ -29,12 +44,14 @@ public class PublishController {
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "tag", required = false) String tag,
+            @RequestParam(value = "id",required = false) Integer id,
             HttpServletRequest request,
             Model model){
         //将我们输入到对话框的中的数据报错起来
         model.addAttribute("title",title);
         model.addAttribute("description",description);
         model.addAttribute("tag",tag);
+        model.addAttribute("id",id);
         if(title == null || title == ""){
             model.addAttribute("error","the title cannot be null");
             return "publish";
@@ -46,21 +63,6 @@ public class PublishController {
             return "publish";
         }
 
-//        User user = null;
-//
-//        Cookie[] cookies = request.getCookies();
-//        if(cookies != null &&  cookies.length!=0){
-//            for (Cookie cookie : cookies) {
-//                if(cookie.getName().equals("token")){
-//                    String token = cookie.getValue();
-//                    user = userMapper.findByToken(token);
-//                    if(user != null){
-//                        request.getSession().setAttribute("user",user);
-//                    }
-//                    break;
-//                }
-//            }
-//        }
         User user = (User)request.getSession().getAttribute("user");
 
         if(user == null){
@@ -72,10 +74,9 @@ public class PublishController {
         question.setDescription(description);
         question.setTag(tag);
         question.setCreator(user.getId());
-        question.setGmtCreate(System.currentTimeMillis());
-        question.setGmtModified(question.getGmtCreate());
-
-        questionMapper.create(question);
+        question.setGmtModified(System.currentTimeMillis());
+        question.setId(id);
+        questionServices.createOrUpdate(question);
         return "redirect:/";
     }
 }

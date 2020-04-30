@@ -80,5 +80,28 @@ public class QuestionServices {
         paginationDTO.setQuestions(questionDTOList);
         return paginationDTO;
     }
+
+    public QuestionDTO getById(Integer id) {
+        Question question = questionMapper.getById(id);
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question,questionDTO);
+        User user = userMapper.findById(question.getCreator());
+        questionDTO.setUser(user);
+        return questionDTO;
+    }
+
+    public void createOrUpdate(Question question) {
+        System.out.println(question);
+        if(question.getId() == null){
+
+            //创建
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.create(question);
+        }else{
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.update(question);
+        }
+    }
     ///目的在于这里面不仅可以使用questionmapper，还能用usermapper，起到一个组装的作用
 }
