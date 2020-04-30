@@ -25,9 +25,41 @@
             <hr>
             <div class="col-lg-12 clo-md-12 col-sm-12 col-xs-12" th:text="${question.description}"></div>
             <hr class="col-lg-12 clo-md-12 col-sm-12 col-xs-12" >
-                <a class="community-edit"  style="color: #999" th:href="@{'/publish/'+${question.id}}" th:if="${session.user != null && session.user.id == question.creator}" >
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true">编辑 </span>
+            <span class="community-edit"  style="color: #999" th:if="${session.user != null && session.user.id == question.creator}">
+                <a th:href="@{'/publish/'+${question.id}}"  >
+                    <span  class="glyphicon glyphicon-edit" aria-hidden="true">编辑 </span>
                 </a>
+
+                <a data-toggle="modal" data-target="#myModal" >
+                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true">删除 </span>
+                </a>
+            </span>
+
+            <!-- 模态框-->
+            <div  class="modal fade" tabindex="-1" role="dialog" id="myModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" >Attention</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                <h6>are you sure want to remove question</h6></br>
+                                 <span th:text="${question.title}"></span>?
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" th:href="@{'/delete/'+${question.id}}" > Remove</a>
+
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <!--  模态框-->
+
         </div>
         <div class="col-lg-3 clo-md-12 col-sm-12 col-xs-12" >
             <div class="col-lg-12 clo-md-12 col-sm-12 col-xs-12" >

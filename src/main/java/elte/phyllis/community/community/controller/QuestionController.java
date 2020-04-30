@@ -2,6 +2,7 @@ package elte.phyllis.community.community.controller;
 
 import elte.phyllis.community.community.dto.QuestionDTO;
 import elte.phyllis.community.community.mapper.QuestionMapper;
+import elte.phyllis.community.community.model.Question;
 import elte.phyllis.community.community.services.QuestionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,4 +22,16 @@ public class QuestionController {
         model.addAttribute("question",questionDTO);
         return "question";
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable(name="id") Integer id,
+                         Model model){
+        QuestionDTO questionDTO = questionServices.getById(id);
+         model.addAttribute("question",questionDTO);
+        questionServices.deleteById(id);
+
+        return "redirect:/";
+        //将获取到的元素填充到页面上
+    }
+
 }

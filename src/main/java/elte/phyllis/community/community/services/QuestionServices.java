@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+///目的在于这里面不仅可以使用questionmapper，还能用usermapper，起到一个组装的作用
 @Service
 public class QuestionServices {
 
@@ -103,5 +103,8 @@ public class QuestionServices {
             questionMapper.update(question);
         }
     }
-    ///目的在于这里面不仅可以使用questionmapper，还能用usermapper，起到一个组装的作用
+
+    public void deleteById(Integer id) {
+        questionMapper.delete(id);
+    }
 }
