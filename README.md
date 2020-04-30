@@ -8,6 +8,7 @@
 [FlyWay 的maven配置](https://flywaydb.org/getstarted/firststeps/maven)
 [bootstrap](https://v3.bootcss.com/css/)
 [lombok](https://projectlombok.org/ )
+[spring interceptor](https://docs.spring.io/spring/docs/5.0.3.RELEASE/spring-framework-reference/web.html#mvc-handlermapping-interceptor)
 
 ### 工具
 https://git-scm.com/
