@@ -23,12 +23,22 @@ public class QuestionServices {
     private QuestionMapper questionMapper;
 
     public PaginationDTO list(Integer page, Integer size) {
+
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalCount = questionMapper.count();
+        paginationDTO.setPagination(totalCount,page,size);
+        if(page<1){
+            page = 1;
+        }else if(page>paginationDTO.getTotalPage()){
+            page = paginationDTO.getTotalPage();
+        }
+        //size*(page-1)
         Integer offset  =size * (page-1);
         List<Question> questions= questionMapper.list(offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
-        PaginationDTO paginationDTO = new PaginationDTO();
         for (Question question : questions) {
-            User user = userMapper.findById(question.getId());
+            //这里要找到user的头像，肯定是传递的是question里面的creator的值啊，肯定不是getID，那个question的ID，跟USERID 没关系
+            User user = userMapper.findById(question.getCreator());
             //把question里面的对象都放入到DTO里面去
             QuestionDTO questionDTO = new QuestionDTO();
 
@@ -39,8 +49,8 @@ public class QuestionServices {
             questionDTOList.add(questionDTO);
         }
         paginationDTO.setQuestions(questionDTOList);
-        Integer totalCount = questionMapper.count();
-        paginationDTO.setPagination(totalCount,page,size);
+
+
 
         return paginationDTO;
     }
