@@ -1,19 +1,19 @@
-## 代码社区
+## code community
 
-### 资料
-[Spring 文档](https://spring.io/guides)
+### material
+[Spring Document](https://spring.io/guides)
 [Spring Web](https://spring.io/guides/gs/serving-web-content/)
 [es](https://elasticsearch.cn/explore/)
 [Github deploy key]()
-[FlyWay 的maven配置](https://flywaydb.org/getstarted/firststeps/maven)
+[FlyWay maven config](https://flywaydb.org/getstarted/firststeps/maven)
 [bootstrap](https://v3.bootcss.com/css/)
 [lombok](https://projectlombok.org/ )
 [spring interceptor](https://docs.spring.io/spring/docs/5.0.3.RELEASE/spring-framework-reference/web.html#mvc-handlermapping-interceptor)
 
-### 工具
+### tool
 https://git-scm.com/
 
-### 脚本
+### script
 ```sql
 create table USER
 (

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>phyllis 的社区</title>
+    <title>phyllis community</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -28,7 +28,7 @@
                         <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
                     </h4>
                     <span th:text="${question.description}"></span><br>
-                    <span class="comment-text"> <span th:text="${question.commentCount}"></span> 个回复  • <span th:text="${question.viewCount}"></span> 次浏览  <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span></span>
+                    <span class="comment-text"> <span th:text="${question.commentCount}"></span>  reply volume • <span th:text="${question.viewCount}"></span> pageviews  <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span></span>
                 </div>
                 <hr>
             </div>
@@ -62,11 +62,10 @@
                 </ul>
             </nav>
         </div>
-        <div class="col-lg-3 clo-md-12 col-sm-12 col-xs-12" >
+        <p class="col-lg-3 clo-md-12 col-sm-12 col-xs-12" >
             <h3>HOT TOPIC</h3>
-            • 问题标题: 请用精简的语言描述您发布的问题，不超过25字
-                c
-            • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字
+            <p>• Issue Title: Please use concise language to describe the issue you posted</p>
+            <p> • Chioce Tag: Choose one or more suitable tags</p>
         </div>
     </div>
 </div>
