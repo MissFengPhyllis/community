@@ -72,10 +72,14 @@ public class AuthorizeController {
     public String logout(HttpServletRequest request,HttpServletResponse response){
         //清除session
         request.removeAttribute("user");
+        request.removeAttribute("JSESSIONID");
         //清除cookie
         Cookie cookie = new Cookie("token",null);
+        Cookie jsessionid = new Cookie("JSESSIONID",null);
         cookie.setMaxAge(0);
+
         response.addCookie(cookie);
+        response.addCookie(jsessionid);
         return "redirect:/";
     }
 }
