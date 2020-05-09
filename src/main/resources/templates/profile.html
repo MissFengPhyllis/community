@@ -25,9 +25,9 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}">Spring boot Study</h4>
+                    <h4 class="media-heading" th:text="${question.title}"><a th:href="@{'/publish/'+${question.id}}"  ></a></h4>
                     <span th:text="${question.description}"></span><br>
-                    <span class="comment-text"> <span th:text="${question.commentCount}"></span> 个回复  • <span th:text="${question.viewCount}"></span> 次浏览  <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span></span>
+                    <span class="comment-text"> <span th:text="${question.commentCount}"></span> replies  • <span th:text="${question.viewCount}"></span> views  <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span></span>
                 </div>
                 <hr>
             </div>
@@ -65,10 +65,10 @@
         <div class="col-lg-3 clo-md-12 col-sm-12 col-xs-12" >
             <div class="list-group">
                 <a href="/profile/questions" th:class="${section=='questions'}? 'list-group-item active':'list-group-item'">
-                   我的问题
+                   My question
                 </a>
                 <a href="/profile/replies"  th:class="${section=='replies'}? 'list-group-item active':'list-group-item'">
-                    <span>最新回复</span>
+                    <span>new replies</span>
                     <span class="badge">14</span>
                 </a>
                 <a href="#" class="list-group-item">Vestibulum at eros</a>
