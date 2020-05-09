@@ -25,7 +25,7 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"><a th:href="@{'/publish/'+${question.id}}"  ></a></h4>
+                    <h4 class="media-heading" ><a th:href="@{'/publish/'+${question.id}}"  th:text="${question.title}"></a></h4>
                     <span th:text="${question.description}"></span><br>
                     <span class="comment-text"> <span th:text="${question.commentCount}"></span> replies  • <span th:text="${question.viewCount}"></span> views  <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span></span>
                 </div>
